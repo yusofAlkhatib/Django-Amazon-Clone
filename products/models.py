@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 
 FLAG_CHOICES = (
     ('New','New'),
@@ -20,21 +21,25 @@ class Product(models.Model):
     video = models.URLField(_('Video'),null=True,blank=True)
     quantity = models.IntegerField(_('Quantity'))
     flag = models.CharField(_('Flag'),max_length=10,choices=FLAG_CHOICES)
+    brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
+    slug = models.SlugField(null=True,blank=True)
 
 class ProductImages(models.Model):
-    pass
+    product = models.ForeignKey(Product , related_name='product_image',on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images')
 
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='brands')
+    slug = models.SlugField(null=True,blank=True)
 
 
 
 class Review(models.Model):
-    user = ''
-    Product = ''
+    user = models.ForeignKey(User,related_name='review_user',on_delete=models.SET_NULL,null=True,blank=True)
+    Product = models.ForeignKey(Product,related_name='review_product',on_delete=models.CASCADE)
     review = models.TextField(max_length=300)
     rate = models.IntegerField()
     Create_at = models.DateTimeField(timezone.now)
