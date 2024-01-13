@@ -1,7 +1,12 @@
+from collections.abc import Iterable
+from typing import Any
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+
+
 
 FLAG_CHOICES = (
     ('New','New'),
@@ -24,6 +29,11 @@ class Product(models.Model):
     brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,blank=True)
 
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
+
 class ProductImages(models.Model):
     product = models.ForeignKey(Product , related_name='product_image',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product_images')
@@ -34,6 +44,10 @@ class Brand(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='brands')
     slug = models.SlugField(null=True,blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Brand, self).save(*args, **kwargs)
 
 
 
