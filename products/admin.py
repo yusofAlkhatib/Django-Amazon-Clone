@@ -13,6 +13,8 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name','subtitle','description']
     inlines = [ProductImageInline]
 
+
+
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Brand)
 admin.site.register(Review)
