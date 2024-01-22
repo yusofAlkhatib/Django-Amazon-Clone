@@ -29,10 +29,15 @@ class Product(models.Model):
     brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,blank=True)
 
-
+    def __str__(self):
+        return self.name
+    
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args, **kwargs)
+
+
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product , related_name='product_image',on_delete=models.CASCADE)
@@ -48,6 +53,9 @@ class Brand(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Brand, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name
 
 
 
