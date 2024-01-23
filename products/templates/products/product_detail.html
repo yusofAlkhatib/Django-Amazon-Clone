@@ -34,18 +34,14 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for item in product.product_image.all %}
+                                <li><img src="{{item.image.url}}" alt="product"></li>
+                                {% endfor %}
                             </ul>
                             <ul class="details-thumb">
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for item in product.product_image.all %}
+                                <li><img src="{{item.image.url}}" alt="product"></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
