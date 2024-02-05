@@ -14,9 +14,12 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
 
 
+class Reviewadmin(admin.ModelAdmin):
+    list_display = ['user','product','rate','create_at']
+    list_filter = ['rate','create_at']
 
 
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Brand)
-admin.site.register(Review)
+admin.site.register(Review,Reviewadmin)
 
