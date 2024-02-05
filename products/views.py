@@ -1,11 +1,15 @@
-from typing import Any
-from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views.generic import ListView , DetailView 
 
 from .models import Product , Brand , Review , ProductImages
+from .forms import ReviewForm
 
 # Create your views here.
+def product_list(request):
+    product = Product.objects.all()
+    return render(request,'list.html',{'data':product})
+
+
 class ProductList(ListView):
     model = Product
 
@@ -42,4 +46,21 @@ class BrandDetail(ListView):
         context = super().get_context_data(**kwargs)
         context["brand"] = Brand.objects.get(slug=self.kwargs['slug'])
         return context
+    
+
+
+
+def add_product_review(request,slug): 
+    product = Product.objects.get(slug=slug)
+
+    if request.method =='Post':
+        form = ReviewForm(request.Post)
+        
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.product = product
+            myform.save()
+
+            return redirect(f'/products/{slug}')
     
