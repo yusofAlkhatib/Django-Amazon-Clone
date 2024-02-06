@@ -9,14 +9,19 @@ from.models import Product
 
 
 
-@api_view(['GET'])
-def product_list_api(request):
-    products = Product.objects.all()
-    data = ProductSerializer(products,many=True,context={"request":request}).data
-    return Response({'products':data})
+# @api_view(['GET'])
+# def product_list_api(request):
+#     products = Product.objects.all()
+#     data = ProductSerializer(products,many=True,context={"request":request}).data
+#     return Response({'products':data})
 
 
 
 class ProductListAPI(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
