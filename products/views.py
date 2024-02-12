@@ -53,14 +53,14 @@ class BrandDetail(ListView):
 def add_product_review(request,slug): 
     product = Product.objects.get(slug=slug)
 
-    if request.method =='Post':
-        form = ReviewForm(request.Post)
+    if request.method =='POST':
+        form = ReviewForm(request.POST)
         
         if form.is_valid():
             myform = form.save(commit=False)
             myform.user = request.user
             myform.product = product
             myform.save()
-
-            return redirect(f'/products/{slug}')
+        
+        return redirect(f'/products/{slug}')
     
