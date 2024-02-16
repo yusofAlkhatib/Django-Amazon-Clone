@@ -5,9 +5,10 @@ from .models import Product , Brand , Review , ProductImages
 from .forms import ReviewForm
 
 # Create your views here.
-def product_list(request):
+def debug(request):
     product = Product.objects.all()
-    return render(request,'list.html',{'data':product})
+
+    return render(request,'products/debug.html',{'data':product})
 
 
 class ProductList(ListView):
