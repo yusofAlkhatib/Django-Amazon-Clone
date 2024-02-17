@@ -49,7 +49,8 @@ def debug(request):
     # django queries are lazy
     # data = Product.objects.filter(name__contains='Jeffrey').order_by('-price')      # merg queries (SQl)
 
-
+    # data = Product.objects.filter(name__contains='Jeffrey')
+    # data = data.order_by('-price')
 
     # data = Product.objects.all()
     # data = Product.objects.values('name')
