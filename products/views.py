@@ -63,6 +63,7 @@ def debug(request):
 
 class ProductList(ListView):
     model = Product
+    paginate_by = 50
 
 
 
