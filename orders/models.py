@@ -2,10 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 from products.models import Product
 from accounts.models import Address
 from utils.generate_code import generate_code
-
 
 
 ORDER_STATUS = (
@@ -22,7 +22,7 @@ class Order(models.Model):
     status = models.CharField(max_length=15,choices=ORDER_STATUS)
     order_time = models.DateTimeField(default=timezone.now)
     delivery_time = models.DateTimeField(null=True,blank=True)
-    delivery_location = models.ForeignKey(Address,related_name='delivery_address',on_delete=models.SET_NULL,blank=True, null=True)
+    delivery_location = models.ForeignKey(Address,related_name='delivery_address', on_delete=models.SET_NULL,null=True,blank=True)
     coupon = models.ForeignKey('Coupon',related_name='order_coupon',on_delete=models.SET_NULL,blank=True,null=True)
     order_total_discount = models.FloatField(blank=True, null=True)
 
@@ -32,7 +32,7 @@ class Order(models.Model):
 
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order,related_name='order_detail',on_delete=models.CASCADE)
-    Product = models.ForeignKey(Order,related_name='order_product',on_delete=models.SET_NULL,blank=True,null=True)
+    product = models.ForeignKey(Order,related_name='order_product',on_delete=models.SET_NULL,blank=True,null=True)
     quantity = models.IntegerField()
     price = models.FloatField()
     total = models.FloatField()
@@ -54,13 +54,13 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.user)
-    
+
     def cart_total(self):
         total = 0
         for item in self.cart_detail.all():
             total += item.total
-
         return total
+
 
 class CartDetail(models.Model):
     cart = models.ForeignKey(Cart,related_name='cart_detail',on_delete=models.CASCADE)
