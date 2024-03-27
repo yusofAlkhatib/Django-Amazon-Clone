@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}
+{% block CSS  %}
     <link rel="stylesheet" href="{% static 'en/css/checkout.css' %}">
-{% endblock %}
+{% endblock CSS  %}
 
 {% block body %}
- 
-
         <!--=====================================
                     BANNER PART START
         =======================================-->
@@ -53,13 +51,12 @@
                                         </thead>
                                         <tbody>
                                             {% for item in cart_detail  %}
-                                
                                                 <tr>
-                                                    <td class="table-serial"><h6>{{ forloop.counter }}</h6></td>
+                                                    <td class="table-serial"><h6>{{forloop.counter}}</h6></td>
                                                     <td class="table-image"><img src="{{item.product.image.url}}" alt="product"></td>
                                                     <td class="table-name"><h6>{{item.product}}</h6></td>
-                                                    <td class="table-price"><h6>$19{{item.product.price}}</h6></td>
-                                                    <td class="table-brand"><h6>{{item.product.brand}} </h6></td>
+                                                    <td class="table-price"><h6>${{item.product.price}}</h6></td>
+                                                    <td class="table-brand"><h6>{{item.product.brand}}</h6></td>
                                                     <td class="table-quantity"><h6>{{item.quantity}}</h6></td>
                                                     <td class="table-action">
                                                         <a class="view" href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
@@ -67,14 +64,15 @@
                                                     </td>
                                                 </tr>
                                             {% endfor %}
-
+                                           
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="chekout-coupon">
                                     <button class="coupon-btn">Do you have a coupon code?</button>
-                                    <form class="coupon-form">
-                                        <input type="text" placeholder="Enter your coupon code">
+                                    <form class="coupon-form" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="coupon_code" placeholder="Enter your coupon code">
                                         <button type="submit"><span>apply</span></button>
                                     </form>
                                 </div>
@@ -426,4 +424,5 @@
         <!--=====================================
                     MODAL EDIT FORM END
         =======================================-->
-        {% endblock body %}
+
+        {% endblock body  %}
