@@ -25,8 +25,8 @@ def checkout(request):
 
 
 
-    if request.method == 'Post':
-        code = request.Post['coupon_code']
+    if request.method =='POST':
+        code = request.POST['coupon_code']
         coupon = Coupon.objects.get(code=code)
 
         if coupon and coupon.quantity > 0:
@@ -41,11 +41,11 @@ def checkout(request):
                 cart.save()
 
                 return render(request,'orders/checkout.html',{
-                'cart_detail':cart_detail ,
-                'delivery_fee':delivery_fee ,
-                'discount':coupon_value ,
-                'sub_total':sub_total ,
-                'total' :total
+                'cart_detail': cart_detail ,
+                'delivery_fee': delivery_fee ,
+                'discount': coupon_value ,
+                'sub_total': sub_total ,
+                'total' : total
             })
         
 
@@ -53,11 +53,11 @@ def checkout(request):
 
 
     return render(request,'orders/checkout.html',{
-        'cart_detail':cart_detail ,
-        'delivery_fee':delivery_fee ,
-        'discount':discount ,
-        'sub_total':sub_total ,
-        'total' :total
+        'cart_detail': cart_detail ,
+        'delivery_fee': delivery_fee ,
+        'discount': discount ,
+        'sub_total': sub_total ,
+        'total' : total
     })
         
 

@@ -102,7 +102,7 @@ class Cart(models.Model):
             for item in self.cart_detail.all():
                 before_discount += item.total
             return round(before_discount - after_discount,2)
-        
+
         else:
             return 0
 
