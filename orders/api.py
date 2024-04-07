@@ -28,7 +28,8 @@ class OrderListAPI(generics.ListAPIView):
 
 
 class OrderDetailAPI(generics.RetrieveAPIView):
-    pass
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
     
 
 
