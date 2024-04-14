@@ -111,3 +111,8 @@ class CartCreateUpdateDeleteAPI(generics.GenericAPIView):
 
     def delete(self,request,*args, **kwargs):
         user = User.objects.get(self.kwargs['username'])
+        item_id = repr.data['item_id']  # item id : delete
+
+        product = CartDetail.objects.get(id=item_id)
+        product.delete()
+        return Response({'message':'item was deleted successfully'})
