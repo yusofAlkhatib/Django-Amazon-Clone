@@ -99,4 +99,15 @@ class ApplyCouponAPI(generics.GenericAPIView):
 
 
 class CartCreateUpdateDeleteAPI(generics.GenericAPIView):
-    pass
+    
+    def get(self,request,*args, **kwargs):
+        user = User.objects.get(self.kwargs['username'])
+        cart , created = Cart.objects.get_or_create(user=user,status='InProgress')
+        data = CartSerializer(cart).data
+        return Response({'cart':data})
+
+    def post(self,request,*args, **kwargs):
+        user = User.objects.get(self.kwargs['username'])
+
+    def delete(self,request,*args, **kwargs):
+        user = User.objects.get(self.kwargs['username'])
