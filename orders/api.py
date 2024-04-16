@@ -35,8 +35,8 @@ class OrderDetailAPI(generics.RetrieveAPIView):
 
 class CreateOrderAPI(generics.GenericAPIView):
     def post(self,request,*args, **kwargs):
-        user = User.objects.get(self.kwargs['username']) 
-        code = self.kwargs['payment_code']
+        user = User.objects.get(username=self.kwargs['username'])
+        code = request.data['payment_code']
         delivery_location = Address.objects.get(id=request.data['delivery_address_id'])
 
         cart = Cart.objects.get(user=request.user , status='InProgress')
@@ -72,11 +72,10 @@ class CreateOrderAPI(generics.GenericAPIView):
 class ApplyCouponAPI(generics.GenericAPIView):
     
     def post(self,request,*args, **kwargs):
-        user = User.objects.get(self.kwargs['username'])  #get user using username : url
+        user = User.objects.get(username=self.kwargs['username'])  #get user using username : url
         coupon = Coupon.objects.get(code = request.data['coupon_code']) #get coupon using coupon code comming from request body (mobile)
+        
         cart = Cart.objects.get(user=user , status='InProgress')
-
-        delivery_fee = DeliveryFee.objects.last().fee
         sub_total = cart.cart_total()
     
 
@@ -101,13 +100,13 @@ class ApplyCouponAPI(generics.GenericAPIView):
 class CartCreateUpdateDeleteAPI(generics.GenericAPIView):
     
     def get(self,request,*args, **kwargs):
-        user = User.objects.get(self.kwargs['username'])
+        user = User.objects.get(username=self.kwargs['username'])
         cart , created = Cart.objects.get_or_create(user=user,status='InProgress')
         data = CartSerializer(cart).data
         return Response({'cart':data})
 
     def post(self,request,*args, **kwargs):
-        user = User.objects.get(self.kwargs['username'])
+        user = User.objects.get(username=self.kwargs['username'])
         product_id = request.data['product_id']
         quantity = int(request.data['quantity'])
 
@@ -123,8 +122,8 @@ class CartCreateUpdateDeleteAPI(generics.GenericAPIView):
         return Response({'message':'product was addedd successfully'})
 
     def delete(self,request,*args, **kwargs):
-        user = User.objects.get(self.kwargs['username'])
-        item_id = repr.data['item_id']  # item id : delete
+        user = User.objects.get(username=self.kwargs['username'])
+        item_id = request.data['item_id']  # item id : delete
 
         product = CartDetail.objects.get(id=item_id)
         product.delete()
