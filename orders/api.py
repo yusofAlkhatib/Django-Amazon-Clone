@@ -39,7 +39,7 @@ class CreateOrderAPI(generics.GenericAPIView):
         code = request.data['payment_code']
         delivery_location = Address.objects.get(id=request.data['delivery_address_id'])
 
-        cart = Cart.objects.get(user=request.user , status='InProgress')
+        cart = Cart.objects.get(user=user , status='InProgress')
         cart_detail = CartDetail.objects.filter(cart=cart)
 
         # create order from cart
