@@ -1,8 +1,8 @@
 from django.shortcuts import render , redirect
 from django.views.generic import ListView , DetailView 
 
-from django.db.models import Q 
-
+from django.db.models import Q , F , Func
+from django.db.models.aggregates import Avg , Sum , Count , Max , Min
 
 from .models import Product , Brand , Review , ProductImages
 from .forms import ReviewForm
@@ -56,7 +56,24 @@ def debug(request):
     # data = Product.objects.values('name')
     # # data = Product.objects.values_list('name')
     # data = Product.objects.only('name')
-    data = Product.objects.defer('slug','description')
+    # data = Product.objects.defer('slug','description')
+
+    # data = Product.objects.all() # R product:brand
+    # data = Product.objects.select_related('brand').all() # products:brands one table Foreignkey ,one-to-one
+    # data = Product.objects.prefetch_related('brand').all() # many-to-many
+
+    # aggregation
+    # data = Product.objects.aggregate(myavg=Avg('price'))
+    # data = Product.objects.aggregate(mysum=Sum('price'))
+    # data = Product.objects.aggregate(mymin=Min('price'))
+    # data = Product.objects.aggregate(mymax=Max('price'))
+
+    #Annotation
+    # data = Product.objects.annotate(sell_price=F('price')*1.20)
+    data = Product.objects.annotate(
+    sell_price=Func(F('price') *1.20 , function='ROUND')
+    )
+
 
     return render(request,'products/debug.html',{'data':data})
 

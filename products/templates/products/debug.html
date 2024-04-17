@@ -7,10 +7,10 @@
 </head>
 <body>
     
-    <H1>Welcom</H1>
+    <H1>Welcome</H1>
 <ul>
     {% for object in data %}
-        <li>{{object}} - {{object.price}}</li>
+        <li>{{object}} - Buy price : {{object.price}} - Sell price {{object.sell_price}}</li>
     {% endfor %}
 </ul>
 
