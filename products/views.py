@@ -7,6 +7,11 @@ from django.db.models.aggregates import Avg , Sum , Count , Max , Min
 from .models import Product , Brand , Review , ProductImages
 from .forms import ReviewForm
 
+from django.views.decorators.cache import cache_page
+
+
+
+@cache_page(60 * 1)
 # Create your views here.
 def debug(request):
     # data = Product.objects.all()
@@ -70,9 +75,11 @@ def debug(request):
 
     #Annotation
     # data = Product.objects.annotate(sell_price=F('price')*1.20)
-    data = Product.objects.annotate(
-    sell_price=Func(F('price') *1.20 , function='ROUND')
-    )
+    # data = Product.objects.annotate(
+    # sell_price=Func(F('price') *1.20 , function='ROUND')
+    # )
+
+    data = Product.objects.all()
 
 
     return render(request,'products/debug.html',{'data':data})
