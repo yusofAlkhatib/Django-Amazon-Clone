@@ -16,4 +16,21 @@ services:
     image: "redis:alpine"
     container_name: redis
 
+
+  celery:
+    image: celery:alpine
+    container_name: celeryserver
+    restart: always
+    build: 
+      context: .
+    depends_on:
+      - redis
+      - djangoserver
+    volumes:
+      - .:/app
+    command: celery -A project worker --loglevel INFO
+    environment:
+      CELERY_BROKER_URL : "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND : "redis://redis:6379/0"
+
       
