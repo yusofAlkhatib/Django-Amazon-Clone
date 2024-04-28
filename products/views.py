@@ -9,9 +9,11 @@ from .forms import ReviewForm
 
 from django.views.decorators.cache import cache_page
 
+from .tasks import send_emails
 
 
-@cache_page(60 * 1)
+
+# @cache_page(60 * 1)
 # Create your views here.
 def debug(request):
     # data = Product.objects.all()
@@ -78,6 +80,8 @@ def debug(request):
     # data = Product.objects.annotate(
     # sell_price=Func(F('price') *1.20 , function='ROUND')
     # )
+
+    send_emails.delay()
 
     data = Product.objects.all()
 
