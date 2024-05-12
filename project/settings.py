@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +47,6 @@ INSTALLED_APPS = [
     'products',
     'settings',
     'orders',
-    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +165,13 @@ CACHES = {
 # CELERY_RESULT_BACKEND ="redis://localhost:6379"
 CELERY_BROKER_URL="redis://redis:6379/0"
 CELERY_RESULT_BACKEND ="redis://redis:6379/0"
+
+
+
+# accounts
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+# mail settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
