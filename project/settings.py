@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     "debug_toolbar",
+    "django_bootstrap5",
     
     'products',
     'settings',
