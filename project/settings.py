@@ -44,11 +44,23 @@ INSTALLED_APPS = [
     'django_filters',
     "debug_toolbar",
     "django_bootstrap5",
+    'rest_framework.authtoken',
     
     'products',
     'settings',
     'orders',
 ]
+
+
+# RestAPI Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
