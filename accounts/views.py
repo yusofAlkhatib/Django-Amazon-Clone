@@ -77,7 +77,7 @@ def signup(request):
 
  
 def user_activate(request,username):
-    profile = Profile.objects.get(user__username='')
+    profile = Profile.objects.get(user__username=username)
     
     
     if request.method == 'POST':
