@@ -141,14 +141,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
+# LOCALE_PATHS = (BASE_DIR + 'locale/', )
+LOCALE_PATHS = ['locale']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -201,3 +200,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_USE_TLS = True  # Set it to False if not using TLS
 EMAIL_HOST_USER = 'yusof094@gmail.com'  # your SMTP username
 # EMAIL_HOST_PASSWORD = 'your_email_password'
+
+FILE_CHARSET = 'utf-8'

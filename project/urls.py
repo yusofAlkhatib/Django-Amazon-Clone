@@ -51,6 +51,7 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
     path('', include('settings.urls')),
 
+
     
     # path('rest-auth/', include('dj_rest_auth.urls')),
     # path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
