@@ -11,6 +11,9 @@ from django.views.decorators.cache import cache_page
 
 from .tasks import send_emails
 
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
 
 
 # @cache_page(60 * 1)
@@ -143,6 +146,11 @@ def add_product_review(request,slug):
             myform.user = request.user
             myform.product = product
             myform.save()
+
         
-        return redirect(f'/products/{slug}')
+        reviews = Review.objects.filter(product=product)
+        page = render_to_string('includes/review.html',{'product_reviews':reviews})
+        return JsonResponse({'result':page})
+        
+  
     
