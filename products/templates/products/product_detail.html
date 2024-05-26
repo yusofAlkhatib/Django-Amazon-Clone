@@ -700,6 +700,9 @@
                         dataType: 'json',
                         success:function(response){
                             $('#cart_sidebar').html(response['result'])
+
+                            $('#cart_count').text(response['cart_count'])
+                            $('#cart_total').text(response['total'])
                            // $('#reviewForm').trigger("reset")
                         },
                         error:function(){
