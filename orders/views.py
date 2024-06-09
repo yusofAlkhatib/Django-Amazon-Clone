@@ -26,7 +26,7 @@ def checkout(request):
     sub_total = cart.cart_total()
     total = sub_total + delivery_fee
 
-
+    print(discount)
 
     if request.method =='POST':
         code = request.POST['coupon_code']
