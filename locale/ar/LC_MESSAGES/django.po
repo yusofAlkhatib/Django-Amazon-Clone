@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-09 12:56+0200\n"
+"POT-Creation-Date: 2024-06-09 13:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: .\products\models.py:20
 msgid "Product Name"
 msgstr "اسم المنتج"
@@ -54,3 +55,22 @@ msgstr "الكمية"
 msgid "Flag"
 msgstr "العلم"
 
+#: .\templates\base.html:153
+msgid "home"
+msgstr "الصفحة الرئيسة"
+
+#: .\templates\base.html:156
+msgid "shop"
+msgstr "تسوق"
+
+#: .\templates\base.html:160
+msgid "Brands"
+msgstr "العلامات التجارية"
+
+#: .\templates\base.html:163
+msgid "Orders"
+msgstr "الطلبات"
+
+#: .\templates\base.html:166
+msgid "Dashboard"
+msgstr "لوحة التحكم"
